@@ -64,7 +64,7 @@ public class CustomerServiceImp implements CustomerService
         newCustomer.setPaymentamt(customers.getPaymentamt());
         newCustomer.setOutstandingamt(customers.getOutstandingamt());
         newCustomer.setPhone(customers.getPhone());
-        newCustomer.setAgents(agentsService.findAgentById(customers.getAgents().getAgentcode()));
+        newCustomer.setAgent(agentsService.findAgentById(customers.getAgent().getAgentcode()));
 
         for (Orders o : customers.getOrders())
         {

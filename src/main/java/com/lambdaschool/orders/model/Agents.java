@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "agents")
+@Table(name = "agent")
 public class Agents
 {
     @Id
@@ -20,10 +20,10 @@ public class Agents
     private String phone;
     private String country;
 
-    @OneToMany(mappedBy = "agents",
+    @OneToMany(mappedBy = "agent",
                 cascade = CascadeType.ALL,
                 orphanRemoval = true)
-    @JsonIgnoreProperties("agents")
+    @JsonIgnoreProperties("agent")
     private List<Customers> customers = new ArrayList<>();
 
     public Agents()
