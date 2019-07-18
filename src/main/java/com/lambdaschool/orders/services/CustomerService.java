@@ -10,6 +10,8 @@ public interface CustomerService
 
     Customers findCustomerByName(String name);
 
+    Customers findCustomersById(long id);
+
     Customers save(Customers customers);
 
     Customers update(Customers customers, long id);

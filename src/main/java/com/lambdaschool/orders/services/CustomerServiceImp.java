@@ -42,6 +42,12 @@ public class CustomerServiceImp implements CustomerService
         return customer;
     }
 
+    @Override
+    public Customers findCustomersById(long id) throws EntityNotFoundException
+    {
+        return custrepos.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+    }
+
     @Transactional
     @Override
     public Customers save(Customers customers)
