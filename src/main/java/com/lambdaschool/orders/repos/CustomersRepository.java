@@ -7,5 +7,5 @@ public interface CustomersRepository extends CrudRepository<Customers, Long>
 {
     Customers findByCustname(String name);
 
-    Customers findByAgent_Agentcode(long id);
+//    Customers findByAgent_Agentcode(long id);
 }

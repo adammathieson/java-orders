@@ -16,15 +16,14 @@ public class Orders
     private double advanceamount;
     private String orderdecription;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "custcode",
                 nullable = false)
     @JsonIgnoreProperties("orders")
     private Customers customers;
 
-    public Orders(double ordamount)
+    public Orders()
     {
-        this.ordamount = ordamount;
     }
 
     public Orders(double ordamount, double advanceamount, Customers customers, String orderdecription)
