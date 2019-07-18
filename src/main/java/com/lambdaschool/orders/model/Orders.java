@@ -14,6 +14,7 @@ public class Orders
 
     private double ordamount;
     private double advanceamount;
+    private String orderdecription;
 
     @OneToMany
     @JoinColumn(name = "custcode",
@@ -26,11 +27,12 @@ public class Orders
         this.ordamount = ordamount;
     }
 
-    public Orders(double ordamount, double advanceamount, Customers customers)
+    public Orders(double ordamount, double advanceamount, Customers customers, String orderdecription)
     {
         this.ordamount = ordamount;
         this.advanceamount = advanceamount;
         this.customers = customers;
+        this.orderdecription = orderdecription;
     }
 
     public long getOrdnum()
@@ -61,6 +63,16 @@ public class Orders
     public void setAdvanceamount(double advanceamount)
     {
         this.advanceamount = advanceamount;
+    }
+
+    public String getOrderdecription()
+    {
+        return orderdecription;
+    }
+
+    public void setOrderdecription(String orderdecription)
+    {
+        this.orderdecription = orderdecription;
     }
 
     public Customers getCustomers()
