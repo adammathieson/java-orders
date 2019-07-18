@@ -35,9 +35,8 @@ public class Customers
                 orphanRemoval = true)
     private List<Orders> orders = new ArrayList<>();
 
-    public Customers(String custname)
+    public Customers()
     {
-        this.custname = custname;
     }
 
     public Customers(String custname, String custcity, String workinarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agents agents)

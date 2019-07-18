@@ -2,6 +2,7 @@ package com.lambdaschool.orders.services;
 
 
 import com.lambdaschool.orders.model.Customers;
+import com.lambdaschool.orders.model.Orders;
 import com.lambdaschool.orders.repos.CustomersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,14 +58,65 @@ public class CustomerServiceImp implements CustomerService
         newCustomer.setPaymentamt(customers.getPaymentamt());
         newCustomer.setOutstandingamt(customers.getOutstandingamt());
         newCustomer.setPhone(customers.getPhone());
-        newCustomer.setAgents(agentServic);
+        newCustomer.setAgents(agentsService.findAgentById(customers.getAgents().getAgentcode()));
+
+        for (Orders o : customers.getOrders())
+        {
+            newCustomer.getOrders().add(new Orders(o.getOrdamount(), o.getAdvanceamount(), newCustomer, o.getOrderdecription()));
+        }
         return custrepos.save(newCustomer);
     }
 
     @Override
     public Customers update(Customers customers, long id)
     {
-        return null;
+        Customers customer = custrepos.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+
+        if (customers.getCustname() != null)
+        {
+            customer.setCustname(customers.getCustname());
+        }
+        if (customers.getCustcity() != null)
+        {
+            customer.setCustcity(customers.getCustcity());
+        }
+        if (customers.getWorkinarea() != null)
+        {
+            customer.setWorkinarea(customers.getWorkinarea());
+        }
+        if (customers.getCustcountry() != null)
+        {
+            customer.setCustcountry(customers.getCustcountry());
+        }
+        if (customers.getGrade() != null)
+        {
+            customer.setGrade(customers.getGrade());
+        }
+        if (customers.getOpeningamt() != 0)
+        {
+            customer.setOpeningamt(customers.getOpeningamt());
+        }
+        if (customers.getReceiveamt() != 0)
+        {
+            customer.setReceiveamt(customers.getReceiveamt());
+        }
+        if (customers.getPaymentamt() != 0)
+        {
+            customer.setPaymentamt(customers.getPaymentamt());
+        }
+        if (customers.getPhone() != null)
+        {
+            customers.setPhone(customers.getPhone());
+        }
+
+        // Adds new orders
+        if (customers.getOrders().size() > 0)
+        {
+            for (Orders o : customers.getOrders())
+            customer.getOrders().add(new Orders(o.getOrdamount(), o.getAdvanceamount(), customer, o.getOrderdecription()));
+        }
+
+        return custrepos.save(customer);
     }
 
     @Override
